@@ -23,7 +23,28 @@
         </header>
 
         <main id="app-content">
-            <p>Loading Application...</p>
+            <section id="grid-view">
+                <h2>Available Items</h2>
+
+                <!--search and filter-->
+                <div class="controls">
+                    <label for="search-input">Search:</label>
+                    <input type="text" id="search-input" placeholder="Search Keywords...">
+
+                    <label for="category-filter">Category:</label>
+                    <select id="category-filter" name="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="textbooks">Textbooks</option>
+                        <option value="furniture">Furniture</option>
+                        <option value="electronics">Electronics</option>
+                    </select>
+                </div>
+
+                <!--actual grid-->
+                <div id="listings-grid">
+                    <!--item listings will be injected by JS here later-->
+                </div>
+            </section>
         </main>
 
         <footer>

@@ -45,6 +45,35 @@
                     <!--item listings will be injected by JS here later-->
                 </div>
             </section>
+
+            <!--creating new listing-->
+            <section id="create-view">
+                <h2>Post a New Item</h2>
+
+                <form id="create-listing-form">
+                    <div>
+                        <label for="item-title">Title:</label>
+                        <input type="text" id="item-title" name="item-title" required>
+                    </div>
+
+                    <div>
+                        <label for="item-category">Category:</label>
+                        <select id="item-category" name="item-category" required>
+                            <option value="">-- Select a Category --</option>
+                            <option value="textbooks">Textbooks</option>
+                            <option value="furniture">Furniture</option>
+                            <option value="electronics">Electronics</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="item-desc">Description:</label>
+                        <textarea id="item-desc" name="item-desc" rows="4" required></textarea>
+                    </div>
+
+                    <button type="submit">Submit Listing</button>
+                </form>
+            </section>
         </main>
 
         <footer>

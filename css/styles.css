@@ -59,3 +59,54 @@ nav select {
     font-weight: bold;
     cursor: pointer;
 }
+
+
+
+/*reusable class selectors for containers*/
+.controls, form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/*input elements*/
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 20px 0;
+    border: 1px;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+/*button and text transformation*/
+button {
+    background-color: #0056b3;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+/*unique id selectors*/
+#listings-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/*hide views initially so only grid shows/will use JS to show one view at a time*/
+#detail-view, #create-view, #dashboard-view {
+    display: none;
+}
+
+/*text wrapping*/
+.item-description {
+    white-space: normal; 
+}

@@ -9,7 +9,7 @@
 body {
     background-color: #f4f5f7;
     color: #1a1a1a;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: monospace, serif, arial;
     line-height: 1.6;
 }
 
@@ -109,4 +109,14 @@ button {
 /*text wrapping*/
 .item-description {
     white-space: normal; 
+}
+
+/*footer fix*/
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 50px;
+    color: #777777;
+    font-size: 0.85rem;
+    font-family: Arial;
 }

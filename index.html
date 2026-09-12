@@ -74,6 +74,39 @@
                     <button type="submit">Submit Listing</button>
                 </form>
             </section>
+
+            <!--listing detail pagee-->
+            <section id="detail-view">
+                <button id="back-to-grid">Back to Listings</button>
+
+                <!--dynamic listing details-->
+                <div id="listing-info">
+                    <h2 id="detail-title">Item Title</h2>
+                    <p><strong>Price:</strong> €<span id="detail-price">0.00</span></p>
+                    <p><strong>Category:</strong> <span id="detail-category">Category</span></p>
+                    <p><strong>Seller:</strong> <span id="detail-author">Author Name</span></p>
+                    <p id="detail-desc">Item description....</p>
+                </div>
+
+                <!--contact/inquiry form-->
+                <h3>Contact Seller</h3>
+                <form id="inquiry-form">
+                    <!--hidden input to link msg to correct item-->
+                    <input type="hidden" id="inqury-listing-id">
+
+                    <div>
+                        <label for="inquiry-sender">Email Address:</label>
+                        <input type="email" id="inquiry-sender" name="inquiry-sender" required>
+                    </div>
+
+                    <div>
+                        <label for="inquiry-message">Message:</label>
+                        <textarea id="inquiry-message" name="inquiry-message" rows="4" cols="50" required></textarea>
+                    </div>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </section>
         </main>
 
         <footer>

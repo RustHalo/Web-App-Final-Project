@@ -1,0 +1,28 @@
+/*universal reset*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*global body styling*/
+
+body {
+    background-color: rgb(240, 240, 240);
+    color: #000000;
+    font-family: sans-serif;
+}
+
+/*main layout*/
+
+main {
+    width: 90%;
+    margin: 20px auto;
+}
+
+/*typography basics*/
+
+h1, h2, h3 {
+    margin-bottom: 15px;
+}

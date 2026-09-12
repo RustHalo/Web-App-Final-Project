@@ -7,9 +7,9 @@
 
 /*global body styling*/
 body {
-    background-color: #f4f5f7;
-    color: #1a1a1a;
-    font-family: monospace, serif, arial;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-family: arial, sans-serif;
     line-height: 1.6;
 }
 
@@ -27,33 +27,33 @@ h1, h2, h3 {
 }
 
 header {
-    background-color: #111111;
+    background-color: #0f172a;
     color: #ffffff;
     padding: 20px 4%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 4px solid #0056b3;
+    border-bottom: 4px solid #3b82f6;
 }
 
 /*remove bottom margin for header title*/
 header h1 {
     margin-bottom: 0;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
 }
 
 /*role switch*/
 nav label {
     font-size: 0.9rem;
     margin-right: 10px;
-    color: #cccccc;
+    color: #cbd5e1;
 }
 
 nav select {
     padding: 8px 12px;
     background-color: #ffffff;
-    color: #111111;
-    border: none;
+    color: #0f172a;
+    border: 1px solid #cdb5e1;
     border-radius: 4px;
     font-size: 0.9rem;
     font-weight: bold;
@@ -66,9 +66,9 @@ nav select {
 .controls, form {
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 4px;
     margin-bottom: 25px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
 }
 
 /*input elements*/
@@ -76,21 +76,21 @@ input, select, textarea {
     width: 100%;
     padding: 12px;
     margin: 8px 0 20px 0;
-    border: 1px;
+    border: 1px solid #94a3b8;
     border-radius: 4px;
     font-family: inherit;
+    background-color: #ffffff;
 }
 
 /*button and text transformation*/
 button {
-    background-color: #0056b3;
+    background-color: #334155;
     color: #ffffff;
     border: none;
     padding: 12px 24px;
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
-    text-transform: uppercase;
 }
 
 /*unique id selectors*/
@@ -116,7 +116,7 @@ footer {
     text-align: center;
     padding: 40px 20px;
     margin-top: 50px;
-    color: #777777;
+    color: #64748b;
     font-size: 0.85rem;
     font-family: Arial;
 }

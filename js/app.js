@@ -101,9 +101,31 @@ function renderListings() {
 
             card.appendChild(editBtn);
         }
+        //view details button
+        let viewBtn = document.createElement('button');
+        viewBtn.textContent = 'View Details';
+        viewBtn.style.backgroundColor = '#1eb568';
+        viewBtn.style.marginTop = '15px';
+
+        viewBtn.onclick = function() {
+            document.getElementById('detail-title').textContent = item.title;
+            document.getElementById('detail-price').textContent = item.price;
+            document.getElementById('detail-category').textContent = item.category;
+            document.getElementById('detail-author').textContent = item.author;
+            document.getElementById('detail-desc').textContent = item.description;
+
+            //store the item ID in the hidden form input
+            document.getElementById('inquiry-listing-id').value = item.id;
+
+            //switch view
+            $('#listings-grid').hide();
+            $('#create-view').hide();
+            $('#detail-view').show();
+
+            window.scrollTo(viewBtn);
 
         grid.appendChild(card);
-    });
+    }});
 }
 
 //Logic Layer

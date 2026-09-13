@@ -104,10 +104,12 @@ function renderListings() {
         //view details button
         let viewBtn = document.createElement('button');
         viewBtn.textContent = 'View Details';
-        viewBtn.style.backgroundColor = '#1eb568';
+        viewBtn.style.backgroundColor = '#1eb568'; 
         viewBtn.style.marginTop = '15px';
 
-        viewBtn.onclick = function() {
+        viewBtn.addEventListener('click', function(event) {
+            console.log("1. Button clicked! Trying to load data for:", item.title);
+
             document.getElementById('detail-title').textContent = item.title;
             document.getElementById('detail-price').textContent = item.price;
             document.getElementById('detail-category').textContent = item.category;
@@ -117,15 +119,19 @@ function renderListings() {
             //store the item ID in the hidden form input
             document.getElementById('inquiry-listing-id').value = item.id;
 
+            console.log("2. Data injected safely. Now switching views...");
+
             //switch view
             $('#listings-grid').hide();
             $('#create-view').hide();
             $('#detail-view').show();
 
             window.scrollTo(viewBtn);
+        });
+        card.appendChild(viewBtn);
 
         grid.appendChild(card);
-    }});
+    });
 }
 
 //Logic Layer
@@ -165,6 +171,19 @@ $(document).ready(function() {
 
         //re-render every time role changes
         renderListings();
+    });
+
+    //back button logic
+    $('#back-to-grid').on('click', function() {
+        $('detail-view').hide();
+        $('#listings-grid').show();
+
+        let currentRole = $('#role-switch').val();
+        if (currentRole === 'member') {
+            $('#create-view').show();
+        }
+
+        window.scrollTo(0, 0);
     });
 
 

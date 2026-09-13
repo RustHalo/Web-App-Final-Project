@@ -149,6 +149,8 @@ function renderListings() {
 
 //dashboard render operatin
 function renderDashboard() {
+
+    let listings = getListings();
     let container = document.getElementById('my-listings-container');
     if (!container) return;
 

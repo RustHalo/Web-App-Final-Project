@@ -172,8 +172,41 @@ function renderDashboard() {
         let price = document.createElement('p');
         price.textContent = "Price: €" + item.price;
 
+        //edit button
+        let editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit Item';
+        editBtn.style.backgroundColor = '#f59e0b';
+        editBtn.style.marginTop = '10px';
+        editBtn.style.marginRight = '10px';
+
+        editBtn.onclick = function () {
+            $('#item-title').val(item.title); 
+            $('#item-price').val(item.price); 
+            $('#item-category').val(item.category); 
+            $('#item-desc').val(item.description);
+
+            $('#create-listing-form').attr('data-edit-id', item.id);
+
+            window.scrollTo(0, 0);
+        };
+
+        //new delete btn
+        let deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete Item';
+        deleteBtn.style.backgroundColor = '#dc2626';
+
+        deleteBtn.onclick = function () {
+            if (confirm("Are you sure you want to delete this listing?")) {
+                deleteListing(item.id);
+                renderDashboard();
+            }
+        };
+
         card.appendChild(title);
         card.appendChild(price);
+        card.appendChild(editBtn);
+        card.appendChild(deleteBtn);
+
         container.appendChild(card);
     });
 }
@@ -224,7 +257,7 @@ $(document).ready(function() {
 
     //back button logic
     $('#back-to-grid').on('click', function() {
-        $('detail-view').hide();
+        $('#detail-view').hide();
         $('#listings-grid').show();
 
         let currentRole = $('#role-switch').val();
@@ -286,6 +319,7 @@ $(document).ready(function() {
         saveListings(currentListings);
         //re-render grid
         renderListings();
+        renderDashboard();
         //clear form fields
         this.reset();
     });

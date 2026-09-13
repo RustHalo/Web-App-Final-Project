@@ -18,6 +18,19 @@ function saveListings(listingsArray) {
     localStorage.setItem('marketplace_listings', JSON.stringify(listingsArray));
 }
 
+//inquiry function
+function getInquiries() {
+    let inquiries = localStorage.getItem('marketplace_inquiries');
+    if (!inquiries) {
+        return [];
+    }
+    return JSON.parse(inquiries);
+}
+//save inquiries
+function saveInquiries(inquiriesArray) {
+    localStorage.setItem('marketplace_inquiries', JSON.stringify(inquiriesArray));
+}
+
 //Delete operation
 function deleteListing(id) {
     let currentListings = getListings();
@@ -240,4 +253,30 @@ $(document).ready(function() {
         //clear form fields
         this.reset();
 
-    })});
+        //create inquiry operation
+        $('#inquiry-form').on('submit', function(event) {
+            event.preventDefault();
+
+            let senderEmail = $('#inquiry-sender').val();
+            let messageText = $('#inquiry-message').val();
+
+            let targetListingId = $('#inquiry-listing-id').val();
+
+            let newInquiry = {
+                id: Date.now(),
+                listingId: targetListingId,
+                sender: senderEmail,
+                message: messageText
+            };
+
+            let currentInquiries = getInquiries();
+            currentInquiries.push(newInquiry);
+            saveInquiries(currentInquiries);
+
+            alert("Your message has been sent to the seller!");
+            this.reset();
+        });
+        }
+
+    )});
+

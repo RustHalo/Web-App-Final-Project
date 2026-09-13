@@ -252,31 +252,31 @@ $(document).ready(function() {
         renderListings();
         //clear form fields
         this.reset();
+    });
 
-        //create inquiry operation
-        $('#inquiry-form').on('submit', function(event) {
-            event.preventDefault();
+    //create inquiry operation
+    $('#inquiry-form').on('submit', function(event) {
+        event.preventDefault();
 
-            let senderEmail = $('#inquiry-sender').val();
-            let messageText = $('#inquiry-message').val();
+        let senderEmail = $('#inquiry-sender').val();
+        let messageText = $('#inquiry-message').val();
 
-            let targetListingId = $('#inquiry-listing-id').val();
+        let targetListingId = $('#inquiry-listing-id').val();
 
-            let newInquiry = {
-                id: Date.now(),
-                listingId: targetListingId,
-                sender: senderEmail,
-                message: messageText
-            };
+        let newInquiry = {
+            id: Date.now(),
+            listingId: targetListingId,
+            sender: senderEmail,
+            message: messageText
+        };
 
-            let currentInquiries = getInquiries();
-            currentInquiries.push(newInquiry);
-            saveInquiries(currentInquiries);
+        let currentInquiries = getInquiries();
+        currentInquiries.push(newInquiry);
+        saveInquiries(currentInquiries);
 
-            alert("Your message has been sent to the seller!");
-            this.reset();
-        });
-        }
-
-    )});
+        alert("Your message has been sent to the seller!");
+        this.reset();
+    });
+    
+});
 

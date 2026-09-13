@@ -41,7 +41,7 @@ function getFavorites() {
     return JSON.parse(favorites);
 }
 //save favorites function
-function saveFavorites() {
+function saveFavorites(favoritesArray) {
     localStorage.setItem('marketplace_favorites', JSON.stringify(favoritesArray));
 }
 
@@ -128,6 +128,24 @@ function renderListings() {
 
             card.appendChild(editBtn);
         }
+
+        //favorites button
+        let favBtn = document.createElement('button');
+        favBtn.textContent = 'Save to Favorites';
+        favBtn.style.backgroundColor = '#3b82f6';
+        favBtn.style.marginTop = '15px';
+        favBtn.style.marginRight = '10px';
+
+        favBtn.onclick = function() {
+            let currentFavorites = getFavorites();
+
+            currentFavorites.push(item);
+            saveFavorites(currentFavorites);
+
+            alert(item.title + " has been saved to your favorites!");
+        };
+        card.appendChild(favBtn);
+
         //view details button
         let viewBtn = document.createElement('button');
         viewBtn.textContent = 'View Details';

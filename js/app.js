@@ -265,8 +265,32 @@ function renderDashboard() {
             let price = document.createElement('p');
             price.textContent = "Price: €" + item.price;
 
+            let viewBtn = document.createElement('button');
+            viewBtn.textContent = 'View Details';
+            viewBtn.style.backgroundColor = '#1eb568'; // Green to match the main grid
+            viewBtn.style.marginTop = '10px';
+
+            viewBtn.addEventListener('click', function(event) {
+                // Populate the detail page with this specific item's data
+                document.getElementById('detail-title').textContent = item.title;
+                document.getElementById('detail-price').textContent = item.price;
+                document.getElementById('detail-category').textContent = item.category;
+                document.getElementById('detail-author').textContent = item.author;
+                document.getElementById('detail-desc').textContent = item.description;
+
+                document.getElementById('inquiry-listing-id').value = item.id;
+
+                $('#dashboard-view').hide();
+                $('#listings-grid').hide();
+                $('#create-view').hide();
+                $('#detail-view').show();
+
+                window.scrollTo(0, 0);
+            });
+
             card.appendChild(title);
             card.appendChild(price);
+            card.appendChild(viewBtn);
 
             favContainer.appendChild(card);
         });

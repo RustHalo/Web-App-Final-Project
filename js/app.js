@@ -31,6 +31,20 @@ function saveInquiries(inquiriesArray) {
     localStorage.setItem('marketplace_inquiries', JSON.stringify(inquiriesArray));
 }
 
+//favorites data function
+function getFavorites() {
+    let favorites = localStorage.getItem('marketplace_favorites');
+    if (!favorites) {
+        return [];
+    }
+    //json turns text back to object
+    return JSON.parse(favorites);
+}
+//save favorites function
+function saveFavorites() {
+    localStorage.setItem('marketplace_favorites', JSON.stringify(favoritesArray));
+}
+
 //Delete operation
 function deleteListing(id) {
     let currentListings = getListings();

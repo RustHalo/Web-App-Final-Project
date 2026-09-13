@@ -147,6 +147,37 @@ function renderListings() {
     });
 }
 
+//dashboard render operatin
+function renderDashboard() {
+    let container = document.getElementById('my-listings-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let myItems = listings.filter((item) => item.author === "Member");
+
+    if (myItems.length === 0) {
+        container.innerHTML = '<p>You have not posted any items yet.</p>';
+        return;
+    }
+
+    myItems.forEach((item) => {
+        let card = document.createElement('div');
+        card.classList.add('controls');
+        card.style.marginTop = '10px';
+
+        let title = document.createElement('h4');
+        title.textContent = item.title;
+
+        let price = document.createElement('p');
+        price.textContent = "Price: €" + item.price;
+
+        card.appendChild(title);
+        card.appendChild(price);
+        container.appendChild(card);
+    });
+}
+
 //Logic Layer
 
 //wait for html to fully load before running logic
@@ -177,14 +208,19 @@ $(document).ready(function() {
         //interface changes by role
         if (currentRole === 'member') {
             $('#create-view').show();
+            $('#dashboard-view').show();
         }
         else {
             $('#create-view').hide();
+            $('#dashboard-view').hide();
         }
 
         //re-render every time role changes
         renderListings();
+        renderDashboard();
     });
+    //automatic trigger
+    $('#role-switch').trigger('change');
 
     //back button logic
     $('#back-to-grid').on('click', function() {
@@ -277,6 +313,6 @@ $(document).ready(function() {
         alert("Your message has been sent to the seller!");
         this.reset();
     });
-    
+
 });
 

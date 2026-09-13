@@ -126,7 +126,7 @@ function renderListings() {
             $('#create-view').hide();
             $('#detail-view').show();
 
-            window.scrollTo(viewBtn);
+            window.scrollTo(0, 0);
         });
         card.appendChild(viewBtn);
 

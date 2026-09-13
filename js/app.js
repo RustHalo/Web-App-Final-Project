@@ -30,8 +30,47 @@ $(document).ready(function() {
 
     $('#role-switch').on('change', function() {
         let currentRole = $(this).val();
-        console.log("Current role is now: " + currentRole);
+        //interface changes by role
+        if (currentRole === 'member') {
+            $('#create-view').show();
+        }
+        else {
+            $('#create-view').hide();
+        }
     });
+
+    //Create operation
+    $('#create-listing-form').on('submit', function(event) {
+        //prevent browser from reloading page automatically
+        event.preventDefault();
+
+        //gather data from html form input
+        let newTitle = $('#item-title').val();
+        let newPrice = $('#item-price').val();
+        let newCategory = $('#item-category').val();
+        let newDesc = $('#item-desc').val();
+
+        //new data object
+        let newItem = {
+            id: Date.now(),
+            title: newTitle,
+            price: parseFloat(newPrice),
+            category: newCategory,
+            description: newDesc,
+            author: "Member"
+        };
+
+        //get and parse current array from storage
+        let currentListings = getListings();
+        //push new item to array
+        currentListings.push(newItem);
+        //stringify and set updated array to localStorage
+        saveListings(currentListings);
+        //re-render grid
+        renderListings();
+        //clear form fields
+        this.reset();
+    })
 });
 
 //initial data (seed data)
@@ -83,7 +122,7 @@ function renderListings() {
         card.appendChild(category);
         card.appendChild(author);
         card.appendChild(description);
-        
+
         grid.appendChild(card);
     });
 }

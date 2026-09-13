@@ -349,6 +349,7 @@ $(document).ready(function() {
         let currentRole = $('#role-switch').val();
         if (currentRole === 'member') {
             $('#create-view').show();
+            $('#dashboard-view').show();
         }
 
         window.scrollTo(0, 0);

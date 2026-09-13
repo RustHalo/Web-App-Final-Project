@@ -243,6 +243,34 @@ function renderDashboard() {
 
         container.appendChild(card);
     });
+
+    //render fav
+    let favorites = getFavorites();
+    let favContainer = document.getElementById('favorites-container');
+    if (!favContainer) return;
+
+    favContainer.innerHTML = "";
+
+    if (favorites.length === 0) {
+        favContainer.innerHTML = '<p>You have no saved favorites yet.</p>';
+    } else {
+        favorites.forEach((item) => {
+            let card = document.createElement('div');
+            card.classList.add('controls');
+            card.style.marginTop = '10px';
+
+            let title = document.createElement('h4');
+            title.textContent = item.title;
+
+            let price = document.createElement('p');
+            price.textContent = "Price: €" + item.price;
+
+            card.appendChild(title);
+            card.appendChild(price);
+
+            favContainer.appendChild(card);
+        });
+    }
 }
 
 //Logic Layer

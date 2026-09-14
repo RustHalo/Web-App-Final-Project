@@ -322,6 +322,69 @@ function renderDashboard() {
 //wait for html to fully load before running logic
 $(document).ready(function() {
 
+    //nav logic
+    //main page link
+    $('#nav-main').on('click', function(event) {
+        //prevent browser from trying to dollow the linkURL
+        event.preventDefault();
+
+        //hide newly added static pages
+        $('#about-view').hide();
+        $('#contact-view').hide();
+        $('#detail-view').hide();
+
+        //show main grid
+        $('#listings-grid').show();
+        $('#grid-view').show();
+
+        //re-evaluate role switch
+        $('#role-switch').trigger('change');
+
+        //update visual active state
+        $('#main-menu a').removeClass('active-nav');
+        $(this).addClass('active-nav');
+    });
+
+    //about page link
+    $('#nav-about').on('click', function(event) {
+        event.preventDefault();
+
+        //hide all sections
+        $('#grid-view').hide();
+        $('#create-view').hide();
+        $('#dashboard-view').hide();
+        $('#detail-view').hide();
+        $('#contact-view').hide();
+
+        //show only About
+        $('#about-view').show();
+
+        //update visual active state
+        $('#main-menu a').removeClass('active-nav');
+        $(this).addClass('active-nav');
+    });
+
+    //contact page link
+    $('#nav-contact').on('click', function(event) {
+        event.preventDefault();
+
+        //hide all sections
+        $('#grid-view').hide();
+        $('#create-view').hide();
+        $('#dashboard-view').hide();
+        $('#detail-view').hide();
+        $('#about-view').hide();
+
+        //show only Contact
+        $('#contact-view').show();
+
+        //update visual active state
+        $('#main-menu a').removeClass('active-nav');
+        $(this).addClass('active-nav');
+    });
+
+
+
     //initial data (seed data)
     // if storage is empty, add 1dummy item to have something to read
     let currentListings = getListings();

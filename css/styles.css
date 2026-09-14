@@ -60,6 +60,41 @@ nav select {
     cursor: pointer;
 }
 
+/*nav styles*/
+#main-menu {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+#main-menu a {
+    color: #e2e8f0; 
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    /* This transition property adds the "motion" cleanly */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#main-menu a:hover {
+    background-color: #38bdf8; /* Bright blue highlight */
+    color: #0f172a; /* Dark text for contrast */
+}
+
+#main-menu a.active-nav {
+    background-color: #2563eb; 
+    color: white;
+}
+
+#about-view, #contact-view {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
 
 
 /*reusable class selectors for containers*/

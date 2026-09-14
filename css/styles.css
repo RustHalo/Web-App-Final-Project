@@ -120,3 +120,15 @@ footer {
     font-size: 0.85rem;
     font-family: Arial;
 }
+
+/*button colors*/
+.btn-delete { background-color: #dc2626;}
+.btn-edit { background-color: #f59e0b;}
+.btn-fav { background-color: #3b82f6;}
+.btn-view { background-color: #1eb568;}
+
+/*button margins*/
+.mt-15 { margin-top: 15px;}
+.mt-10 { margin-top: 10px;}
+.mr-10 { margin-right: 10px;}
+

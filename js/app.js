@@ -97,8 +97,7 @@ function renderListings() {
             let deleteBtn = document.createElement('button');
             deleteBtn.textContent = 'Delete Item';
 
-            deleteBtn.style.backgroundColor = '#dc2626';
-            deleteBtn.style.marginTop = '15px';
+            deleteBtn.classList.add('btn-delete', 'mt-15');
 
             deleteBtn.onclick = function() {
                 deleteListing(item.id);
@@ -111,8 +110,8 @@ function renderListings() {
         if (currentRole === 'member' && item.author === "Member") {
             let editBtn = document.createElement('button');
             editBtn.textContent = 'Edit Item';
-            editBtn.style.backgroundColor = '#f59e0b';
-            editBtn.style.marginTop = '15px';
+
+            editBtn.classList.add('btn-edit', 'mt-15');
 
             editBtn.onclick = function () {
                 $('#item-title').val(item.title); 
@@ -132,9 +131,8 @@ function renderListings() {
         //favorites button
         let favBtn = document.createElement('button');
         favBtn.textContent = 'Save to Favorites';
-        favBtn.style.backgroundColor = '#3b82f6';
-        favBtn.style.marginTop = '15px';
-        favBtn.style.marginRight = '10px';
+
+        favBtn.classList.add('btn-fav', 'mt-15', 'mr-10');
 
         favBtn.onclick = function() {
             let currentFavorites = getFavorites();
@@ -149,8 +147,8 @@ function renderListings() {
         //view details button
         let viewBtn = document.createElement('button');
         viewBtn.textContent = 'View Details';
-        viewBtn.style.backgroundColor = '#1eb568'; 
-        viewBtn.style.marginTop = '15px';
+
+        viewBtn.classList.add('btn-view', 'mt-15');
 
         viewBtn.addEventListener('click', function(event) {
             console.log("1. Button clicked! Trying to load data for:", item.title);
@@ -197,8 +195,7 @@ function renderDashboard() {
 
     myItems.forEach((item) => {
         let card = document.createElement('div');
-        card.classList.add('controls');
-        card.style.marginTop = '10px';
+        card.classList.add('controls', 'mt-10');
 
         let title = document.createElement('h4');
         title.textContent = item.title;
@@ -209,9 +206,8 @@ function renderDashboard() {
         //edit button
         let editBtn = document.createElement('button');
         editBtn.textContent = 'Edit Item';
-        editBtn.style.backgroundColor = '#f59e0b';
-        editBtn.style.marginTop = '10px';
-        editBtn.style.marginRight = '10px';
+
+        editBtn.classList.add('btn-edin', 'mt-10', 'mr-10');
 
         editBtn.onclick = function () {
             $('#item-title').val(item.title); 
@@ -227,7 +223,8 @@ function renderDashboard() {
         //new delete btn
         let deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Delete Item';
-        deleteBtn.style.backgroundColor = '#dc2626';
+
+        deleteBtn.classList.add('btn-delete');
 
         deleteBtn.onclick = function () {
             if (confirm("Are you sure you want to delete this listing?")) {
@@ -256,8 +253,7 @@ function renderDashboard() {
     } else {
         favorites.forEach((item) => {
             let card = document.createElement('div');
-            card.classList.add('controls');
-            card.style.marginTop = '10px';
+            card.classList.add('controls', 'mt-10');
 
             let title = document.createElement('h4');
             title.textContent = item.title;
@@ -267,8 +263,8 @@ function renderDashboard() {
 
             let viewBtn = document.createElement('button');
             viewBtn.textContent = 'View Details';
-            viewBtn.style.backgroundColor = '#1eb568'; // Green to match the main grid
-            viewBtn.style.marginTop = '10px';
+
+            viewBtn.classList.add('btn-view', 'mt-10');
 
             viewBtn.addEventListener('click', function(event) {
                 // Populate the detail page with this specific item's data

@@ -270,7 +270,7 @@ function renderDashboard() {
             let viewBtn = document.createElement('button');
             viewBtn.textContent = 'View Details';
 
-            viewBtn.classList.add('btn-view', 'mt-10');
+            viewBtn.classList.add('btn-view', 'mt-10', 'mr-10');
 
             viewBtn.addEventListener('click', function(event) {
                 // Populate the detail page with this specific item's data

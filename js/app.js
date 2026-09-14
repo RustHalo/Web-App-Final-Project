@@ -312,6 +312,7 @@ function renderDashboard() {
     }
 }
 
+
 //Logic Layer
 
 //wait for html to fully load before running logic
@@ -379,11 +380,66 @@ $(document).ready(function() {
         window.scrollTo(0, 0);
     });
 
+    //inline form validation
+    function validateCreateForm() {
+        //grab elements to be altered
+        const oldErrors = document.querySelectorAll('.error-msg');
+        //loop to iterate through multiple selected elements and call the remove method to delete the element from the document
+        oldErrors.forEach((ele) => {
+            ele.remove();
+        });
+
+        let isValid = true;
+        //select page elements by ID and store as JS objects
+        let titleInput = document.getElementById('item-title');
+        let priceInput = document.getElementById('item-price');
+        let categoryInput = document.getElementById('item-category');
+        let descInput = document.getElementById('item-desc');
+
+        //read user data from form
+        if (titleInput.value.trim() === "") {
+            let errorNode = document.createElement('p');
+            //.textContent for unknown user data to safely render exact characters and prevent cross-site scripting (XSS)
+            errorNode.textContent = "Please enter a title for you listing.";
+            errorNode.classList.add('error-msg');
+            //.after to place the error directly after the input field
+            titleInput.after(errorNode);
+
+            isValid = false;
+        }
+        if (priceInput.value.trim() === "") {
+            let errorNode = document.createElement('p');
+            errorNode.textContent = "please enter a valid price.";
+            errorNode.classList.add('error-msg');
+            priceInput.after(errorNode);
+            isValid = false;
+        }
+        if (categoryInput.value.trim() === "") {
+            let errorNode = document.createElement('p');
+            errorNode.textContent = "Please select a category.";
+            errorNode.classList.add('error-msg');
+            categoryInput.after(errorNode);
+            isValid = false;
+        }
+        if (descInput.value.trim() === "") {
+            let errorNode = document.createElement('p');
+            errorNode.textContent = "Please provide a description.";
+            errorNode.classList.add('error-msg');
+            descInput.after(errorNode);
+            isValid = false;
+        }
+        return isValid;
+    }
+
 
     //Create & update operation
     $('#create-listing-form').on('submit', function(event) {
         //prevent browser from reloading page automatically
         event.preventDefault();
+        //call form validation function
+        if(!validateCreateForm()) {
+            return;
+        }
 
         //gather data from html form input
         let newTitle = $('#item-title').val();

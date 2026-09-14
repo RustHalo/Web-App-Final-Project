@@ -140,3 +140,11 @@ footer {
     color: #64748b;
     font-weight: bold;
 }
+
+.error-msg {
+    color: #dc2626;
+    font-size: 0.85rem;
+    margin-top: -15px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}

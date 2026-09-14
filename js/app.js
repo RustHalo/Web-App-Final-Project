@@ -124,43 +124,24 @@ function renderListings() {
                 card.appendChild(deleteBtn);
             }
 
-            //edit button for member
-            if (currentRole === 'member' && item.author === "Member") {
-                let editBtn = document.createElement('button');
-                editBtn.textContent = 'Edit Item';
+            //favorites button (members only)
+            if (currentRole === 'member') {
+                let favBtn = document.createElement('button');
+                favBtn.textContent = 'Save to Favorites';
 
-                editBtn.classList.add('btn-edit', 'mt-15');
+                favBtn.classList.add('btn-fav', 'mt-15', 'mr-10');
 
-                editBtn.onclick = function () {
-                    $('#item-title').val(item.title); 
-                    $('#item-price').val(item.price); 
-                    $('#item-category').val(item.category); 
-                    $('#item-desc').val(item.description);
+                favBtn.onclick = function() {
+                    let currentFavorites = getFavorites();
 
-                    $('#create-listing-form').attr('data-edit-id', item.id);
+                    currentFavorites.push(item);
+                    saveFavorites(currentFavorites);
 
-                    $('#create-view').show();
-                    window.scrollTo(0, 0);
+                    alert(item.title + " has been saved to your favorites!");
                 };
-
-                card.appendChild(editBtn);
+                card.appendChild(favBtn);
             }
-
-            //favorites button
-            let favBtn = document.createElement('button');
-            favBtn.textContent = 'Save to Favorites';
-
-            favBtn.classList.add('btn-fav', 'mt-15', 'mr-10');
-
-            favBtn.onclick = function() {
-                let currentFavorites = getFavorites();
-
-                currentFavorites.push(item);
-                saveFavorites(currentFavorites);
-
-                alert(item.title + " has been saved to your favorites!");
-            };
-            card.appendChild(favBtn);
+        
 
             //view details button
             let viewBtn = document.createElement('button');

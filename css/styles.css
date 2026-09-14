@@ -3,14 +3,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /*global body styling*/
 body {
-    background-color: #f1f5f9;
-    color: #0f172a;
-    font-family: arial, sans-serif;
-    line-height: 1.6;
+    background-color: #f8fafc; 
+    color: #333333; 
+    padding: 20px;
 }
 
 /*main layout*/
@@ -23,17 +23,11 @@ main {
 /*typography basics*/
 h1, h2, h3 {
     margin-bottom: 15px;
-    font-weight: 600;
+    color: #0f172a;
 }
 
 header {
-    background-color: #0f172a;
-    color: #ffffff;
-    padding: 20px 4%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 4px solid #3b82f6;
+    margin-bottom: 30px;
 }
 
 /*remove bottom margin for header title*/
@@ -100,10 +94,22 @@ nav select {
 /*reusable class selectors for containers*/
 .controls, form {
     background-color: #ffffff;
-    padding: 20px;
-    border-radius: 4px;
-    margin-bottom: 25px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 25px; 
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+.controls h3, 
+.controls h4 {
+    color: #0f172a;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 5px;
+}
+.controls p {
+    margin-bottom: 8px;
+    color: #475569;
 }
 
 /*input elements*/
@@ -119,14 +125,47 @@ input, select, textarea {
 
 /*button and text transformation*/
 button {
-    background-color: #334155;
-    color: #ffffff;
+    padding: 10px 15px;
     border: none;
-    padding: 12px 24px;
+    border-radius: 5px;
     font-weight: bold;
-    border-radius: 4px;
+    color: #ffffff;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
+
+.btn-view, button[type="submit"] {
+    background-color: #2563eb;
+}
+
+.btn-delete {
+    background-color: #dc2626;
+}
+
+.btn-fav {
+    background-color: #10b981;
+}
+
+.btn-edin { 
+    background-color: #f59e0b;
+}
+
+.btn-view:hover, button[type="submit"]:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-delete:hover {
+    background-color: #b91c1c;
+}
+
+.btn-fav:hover {
+    background-color: #059669;
+}
+
+.btn-edin:hover {
+    background-color: #d97706;
+}
+
 
 /*unique id selectors*/
 #listings-grid {

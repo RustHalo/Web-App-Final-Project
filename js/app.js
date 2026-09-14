@@ -115,7 +115,7 @@ function renderListings() {
                 let deleteBtn = document.createElement('button');
                 deleteBtn.textContent = 'Delete Item';
 
-                deleteBtn.classList.add('btn-delete', 'mt-15');
+                deleteBtn.classList.add('btn-delete', 'mt-15', 'mr-10');
 
                 deleteBtn.onclick = function() {
                     deleteListing(item.id);
@@ -337,6 +337,9 @@ $(document).ready(function() {
         $('#listings-grid').show();
         $('#grid-view').show();
 
+        //show trole switch when returning to main
+        $('#role-container').show();
+
         //re-evaluate role switch
         $('#role-switch').trigger('change');
 
@@ -355,6 +358,7 @@ $(document).ready(function() {
         $('#dashboard-view').hide();
         $('#detail-view').hide();
         $('#contact-view').hide();
+        $('#role-container').hide();
 
         //show only About
         $('#about-view').show();
@@ -374,6 +378,7 @@ $(document).ready(function() {
         $('#dashboard-view').hide();
         $('#detail-view').hide();
         $('#about-view').hide();
+        $('#role-container').hide();
 
         //show only Contact
         $('#contact-view').show();

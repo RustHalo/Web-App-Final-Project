@@ -45,6 +45,19 @@ function saveFavorites(favoritesArray) {
     localStorage.setItem('marketplace_favorites', JSON.stringify(favoritesArray));
 }
 
+//report listing
+function getReports() {
+    let reports = localStorage.getItem('marketplace_reports');
+    if (!reports) {
+        return [];
+    }
+    return JSON.parse(reports);
+}
+//function to save reports in browser storage
+function saveReports(reportsArray) {
+    localStorage.setItem('marketplace_reports', JSON.stringify(reportsArray));
+}
+
 //Delete operation
 function deleteListing(id) {
     let currentListings = getListings();
@@ -334,6 +347,7 @@ $(document).ready(function() {
         $('#contact-view').hide();
         $('#detail-view').hide();
         $('#create-view').hide();
+        $('#moderator-view').hide();
 
         //show main grid
         $('#listings-grid').show();
@@ -402,7 +416,49 @@ $(document).ready(function() {
 
     });
 
+    $('#link-report-problem').on('click', function(event) {
+        event.preventDefault();
 
+        let currentItemId = $('#inquiry-listing-id').val();
+        $('#report-listing-id').val(currentItemId);
+
+        $('#detail-view').hide();
+        $('#report-view').show();
+        
+        window.scrollTo(0, 0);
+    });
+
+    $('#cancel-report').on('click', function() {
+        $('#report-form')[0].reset();
+        $('#report-view').hide();
+        $('#detail-view').show();
+    });
+
+    $('#report-form').on('submit', function(event) {
+        event.preventDefault();
+
+        let targetListingId = $('#report-listing-id').val();
+        let reportReason = $('#report-reason').val();
+
+        let newReport = {
+            id: Date.now(),
+            listingId: targetListingId,
+            reason: reportReason
+        };
+
+        let currentReports = getReports();
+        currentReports.push(newReport);
+        saveReports(currentReports);
+
+        alert("Thank you. This listing has been reported to the moderators.");
+
+        this.reset();
+        $('#report-view').hide();
+        $('#listings-grid').show();
+        $('#grid-view').show();
+
+        window.scrollTo(0, 0);
+    });
 
 
     //initial data (seed data)
@@ -430,17 +486,28 @@ $(document).ready(function() {
         //interface changes by role
         if (currentRole === 'member') {
             $('#create-view').hide();
+            $('#grid-view').show();
+            $('#moderator-view').hide();
             $('#dashboard-view').show();
         }
-        else {
+        else if (currentRole === 'moderator') {
+            $('#create-view').hide();
+            $('#grid-view').hide();
+            $('#dashboard-view').hide();
+            $('#moderator-view').show();
+            renderModeratorReports();
+        }
+        else { 
             $('#create-view').hide();
             $('#dashboard-view').hide();
+            $('#moderator-view').hide();
+            $('#grid-view').show();
         }
-
-        //re-render every time role changes
         renderListings();
         renderDashboard();
     });
+
+
     //automatic trigger
     $('#role-switch').trigger('change');
 
@@ -584,6 +651,77 @@ $(document).ready(function() {
 
         window.scrollTo(0, 0);
     });
+
+        //render moderator reports
+    function renderModeratorReports() {
+        let reportsContainer = document.getElementById('reports-container');
+        if (!reportsContainer) return;
+
+        reportsContainer.innerHTML = '';
+        let reports = getReports();
+        let listings = getListings();
+
+        if (reports.length === 0) {
+            reportsContainer.innerHTML = '<p>No flagged listings to review.</p>';
+            return;
+        }
+
+        reports.forEach((report) => {
+            let card = document.createElement('div');
+            card.classList.add('controls', 'mt-10');
+
+            let title = document.createElement('h4');
+
+            let targetItem = listings.find((item) => String(item.id) === String(report.listingId));
+            if (targetItem) {
+                let link = document.createElement('a');
+                link.href = "#";
+                link.textContent = "Reported Listing: " + targetItem.title;
+                link.style.color = "#2563eb";
+                link.style.textDecoration = "underline";
+
+                link.onclick = function(event) {
+                    event.preventDefault();
+
+                    document.getElementById('detail-title').textContent = targetItem.title;
+                    document.getElementById('detail-price').textContent = targetItem.price;
+                    document.getElementById('detail-category').textContent = targetItem.category;
+                    document.getElementById('detail-author').textContent = targetItem.author;
+                    document.getElementById('detail-desc').textContent = targetItem.description;
+                    document.getElementById('inquiry-listing-id').value = targetItem.id;
+
+                    $('#moderator-view').hide();
+                    $('#detail-view').show();
+
+                    window.scrollTo(0, 0);
+                };
+                title.appendChild(link);
+            } else {
+                title.textContent = "Reported Listing: (Item No Longer Exists)";
+            }
+            let reasonP = document.createElement('p');
+            reasonP.innerHTML = "<strong>Reason:</strong> " + report.reason;
+
+            let resolveBtn = document.createElement('button');
+            resolveBtn.textContent = 'Dismiss / Resolve Report';
+            resolveBtn.classList.add('btn-delete', 'mt-10');
+
+            resolveBtn.onclick = function() {
+                if (confirm("Are you sure you want to resolve and remove this report?")) {
+                    let currentReports = getReports();
+                    currentReports = currentReports.filter((r) => r.id !== report.id);
+                    saveReports(currentReports);
+                    renderModeratorReports();
+                }
+            };
+
+            card.appendChild(title);
+            card.appendChild(reasonP);
+            card.appendChild(resolveBtn);
+            reportsContainer.appendChild(card);
+        });
+    }
+
 
     //create inquiry operation
     $('#inquiry-form').on('submit', function(event) {

@@ -132,6 +132,32 @@
 
                     <button type="submit">Send Message</button>
                 </form>
+
+                <!--report problem link-->
+                <div style="text-align: right; margin-top: 15px;">
+                    <a href="#" id="link-report-problem" style="color: #dc2626; font-size: 0.9rem; text-decoration: underline;">Report Problem</a>
+                </div>
+
+            </section>
+
+            <!--repor problem view-->
+            <section id="report-view" style="display: none;">
+                <h2>Report a Problem</h2>
+
+                <div class="controls">
+                    <p>Please describe the issue with this listing. Our moderators will review it.</p>
+                    <form id="report-form" novalidate>
+                        <input type="hidden" id="report-listing-id">
+
+                        <div>
+                            <label for="report-reason">Reason for reporting:</label>
+                            <textarea id="report-reason" name="report-reason" rows="4" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-delete">Submit Report</button>
+                        <button type="button" id="cancel-report" class="btn-view" style="margin-left: 10px;">Cancel</button>
+                    </form>
+                </div>
             </section>
 
             <!--member dashboard-->
@@ -159,6 +185,18 @@
                     </div>
                 </div>
             </section>
+
+            <!--moderator dashboard-->
+            <section id="moderator-view" style="display: none;">
+                <h2>Moderator Dashboard</h2>
+
+                <div class="dashboard-section">
+                    <h3>Flagged Listings (User Reports)</h3>
+                    <div id="reports-container">
+                    </div>
+                </div>
+            </section>
+            
         </main>
 
         <footer>

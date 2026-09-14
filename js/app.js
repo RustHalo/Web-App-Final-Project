@@ -328,10 +328,11 @@ $(document).ready(function() {
         //prevent browser from trying to dollow the linkURL
         event.preventDefault();
 
-        //hide newly added static pages
+        //hide newly added static pages and create form
         $('#about-view').hide();
         $('#contact-view').hide();
         $('#detail-view').hide();
+        $('#create-view').hide();
 
         //show main grid
         $('#listings-grid').show();
@@ -388,6 +389,17 @@ $(document).ready(function() {
         $(this).addClass('active-nav');
     });
 
+    //post a listing
+    $('#btn-show-post-form').on('click', function(event) {
+        event.preventDefault();
+        $('#dashboard-view').hide();
+        $('#create-view').show();
+
+        window.scrollTo(0, 0);
+
+    });
+
+
 
 
     //initial data (seed data)
@@ -414,7 +426,7 @@ $(document).ready(function() {
         let currentRole = $(this).val();
         //interface changes by role
         if (currentRole === 'member') {
-            $('#create-view').show();
+            $('#create-view').hide();
             $('#dashboard-view').show();
         }
         else {
@@ -561,6 +573,13 @@ $(document).ready(function() {
         renderDashboard();
         //clear form fields
         this.reset();
+
+        $('#create-view').hide();
+        $('#grid-view').show();
+        $('#listings-grid').show();
+        $('#dashboard-view').show();
+
+        window.scrollTo(0, 0);
     });
 
     //create inquiry operation

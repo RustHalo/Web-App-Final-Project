@@ -691,8 +691,8 @@ $(document).ready(function() {
                 let link = document.createElement('a');
                 link.href = "#";
                 link.textContent = "Reported Listing: " + targetItem.title;
-                link.style.color = "#2563eb";
-                link.style.textDecoration = "underline";
+
+                link.classList.add('reported-link');
 
                 link.onclick = function(event) {
                     event.preventDefault();

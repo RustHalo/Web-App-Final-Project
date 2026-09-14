@@ -228,3 +228,8 @@ footer {
     margin-bottom: 15px;
     font-weight: bold;
 }
+
+.reported-link {
+    color: #2563eb;
+    text-decoration: underline;
+}

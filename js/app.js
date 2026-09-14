@@ -64,117 +64,136 @@ function renderListings() {
     //check current role
     let currentRole = $('#role-switch').val();
 
-    listings.forEach((item) => {
+    //for search engine
+    let searchQuery = $('#search-input').val().toLowerCase();
+    let categoryFilter = $('#category-filter').val();
+    let filteredListings = listings.filter((item) => {
+        let itemTitle = item.title.toLowerCase();
+        let itemDesc = item.description.toLowerCase();
+        let matchesSearch = itemTitle.includes(searchQuery) || itemDesc.includes(searchQuery);
 
-        let card = document.createElement('div');
-        card.classList.add('controls');
+        let matchesCategory = (categoryFilter === 'all') || (item.category === categoryFilter);
 
-        let title = document.createElement('h3');
-        title.textContent = item.title;
-
-        let price = document.createElement('p');
-        price.textContent = "Price: €" + item.price;
-
-        let category = document.createElement('p');
-        category.textContent = "Category: " + item.category;
-
-        let author = document.createElement('p');
-        author.textContent = "Seller: " + item.author;
-
-        let description = document.createElement('p');
-        description.textContent = "Description: " + item.description;
-
-        card.appendChild(title);
-        card.appendChild(price);
-        card.appendChild(category);
-        card.appendChild(author);
-        card.appendChild(description);
-
-        //role-based access control
-
-        //delete button for moderator
-        if (currentRole === 'moderator') {
-            let deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'Delete Item';
-
-            deleteBtn.classList.add('btn-delete', 'mt-15');
-
-            deleteBtn.onclick = function() {
-                deleteListing(item.id);
-            };
-
-            card.appendChild(deleteBtn);
-        }
-
-        //edit button for member
-        if (currentRole === 'member' && item.author === "Member") {
-            let editBtn = document.createElement('button');
-            editBtn.textContent = 'Edit Item';
-
-            editBtn.classList.add('btn-edit', 'mt-15');
-
-            editBtn.onclick = function () {
-                $('#item-title').val(item.title); 
-                $('#item-price').val(item.price); 
-                $('#item-category').val(item.category); 
-                $('#item-desc').val(item.description);
-
-                $('#create-listing-form').attr('data-edit-id', item.id);
-
-                $('#create-view').show();
-                window.scrollTo(0, 0);
-            };
-
-            card.appendChild(editBtn);
-        }
-
-        //favorites button
-        let favBtn = document.createElement('button');
-        favBtn.textContent = 'Save to Favorites';
-
-        favBtn.classList.add('btn-fav', 'mt-15', 'mr-10');
-
-        favBtn.onclick = function() {
-            let currentFavorites = getFavorites();
-
-            currentFavorites.push(item);
-            saveFavorites(currentFavorites);
-
-            alert(item.title + " has been saved to your favorites!");
-        };
-        card.appendChild(favBtn);
-
-        //view details button
-        let viewBtn = document.createElement('button');
-        viewBtn.textContent = 'View Details';
-
-        viewBtn.classList.add('btn-view', 'mt-15');
-
-        viewBtn.addEventListener('click', function(event) {
-            console.log("1. Button clicked! Trying to load data for:", item.title);
-
-            document.getElementById('detail-title').textContent = item.title;
-            document.getElementById('detail-price').textContent = item.price;
-            document.getElementById('detail-category').textContent = item.category;
-            document.getElementById('detail-author').textContent = item.author;
-            document.getElementById('detail-desc').textContent = item.description;
-
-            //store the item ID in the hidden form input
-            document.getElementById('inquiry-listing-id').value = item.id;
-
-            console.log("2. Data injected safely. Now switching views...");
-
-            //switch view
-            $('#listings-grid').hide();
-            $('#create-view').hide();
-            $('#detail-view').show();
-
-            window.scrollTo(0, 0);
-        });
-        card.appendChild(viewBtn);
-
-        grid.appendChild(card);
+        return matchesSearch && matchesCategory;
     });
+    if (filteredListings.length === 0) {
+        let emptyMsg = document.createElement('p');
+        emptyMsg.textContent = "No Items Found.";
+        emptyMsg.classList.add('empty-message');
+        grid.appendChild(emptyMsg);
+    } else {
+        filteredListings.forEach((item) => {
+
+            let card = document.createElement('div');
+            card.classList.add('controls');
+
+            let title = document.createElement('h3');
+            title.textContent = item.title;
+
+            let price = document.createElement('p');
+            price.textContent = "Price: €" + item.price;
+
+            let category = document.createElement('p');
+            category.textContent = "Category: " + item.category;
+
+            let author = document.createElement('p');
+            author.textContent = "Seller: " + item.author;
+
+            let description = document.createElement('p');
+            description.textContent = "Description: " + item.description;
+
+            card.appendChild(title);
+            card.appendChild(price);
+            card.appendChild(category);
+            card.appendChild(author);
+            card.appendChild(description);
+
+            //role-based access control
+
+            //delete button for moderator
+            if (currentRole === 'moderator') {
+                let deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete Item';
+
+                deleteBtn.classList.add('btn-delete', 'mt-15');
+
+                deleteBtn.onclick = function() {
+                    deleteListing(item.id);
+                };
+
+                card.appendChild(deleteBtn);
+            }
+
+            //edit button for member
+            if (currentRole === 'member' && item.author === "Member") {
+                let editBtn = document.createElement('button');
+                editBtn.textContent = 'Edit Item';
+
+                editBtn.classList.add('btn-edit', 'mt-15');
+
+                editBtn.onclick = function () {
+                    $('#item-title').val(item.title); 
+                    $('#item-price').val(item.price); 
+                    $('#item-category').val(item.category); 
+                    $('#item-desc').val(item.description);
+
+                    $('#create-listing-form').attr('data-edit-id', item.id);
+
+                    $('#create-view').show();
+                    window.scrollTo(0, 0);
+                };
+
+                card.appendChild(editBtn);
+            }
+
+            //favorites button
+            let favBtn = document.createElement('button');
+            favBtn.textContent = 'Save to Favorites';
+
+            favBtn.classList.add('btn-fav', 'mt-15', 'mr-10');
+
+            favBtn.onclick = function() {
+                let currentFavorites = getFavorites();
+
+                currentFavorites.push(item);
+                saveFavorites(currentFavorites);
+
+                alert(item.title + " has been saved to your favorites!");
+            };
+            card.appendChild(favBtn);
+
+            //view details button
+            let viewBtn = document.createElement('button');
+            viewBtn.textContent = 'View Details';
+
+            viewBtn.classList.add('btn-view', 'mt-15');
+
+            viewBtn.addEventListener('click', function(event) {
+                console.log("1. Button clicked! Trying to load data for:", item.title);
+
+                document.getElementById('detail-title').textContent = item.title;
+                document.getElementById('detail-price').textContent = item.price;
+                document.getElementById('detail-category').textContent = item.category;
+                document.getElementById('detail-author').textContent = item.author;
+                document.getElementById('detail-desc').textContent = item.description;
+
+                //store the item ID in the hidden form input
+                document.getElementById('inquiry-listing-id').value = item.id;
+
+                console.log("2. Data injected safely. Now switching views...");
+
+                //switch view
+                $('#listings-grid').hide();
+                $('#create-view').hide();
+                $('#detail-view').show();
+
+                window.scrollTo(0, 0);
+            });
+            card.appendChild(viewBtn);
+
+            grid.appendChild(card);
+        });
+    }
 }
 
 //dashboard render operatin
@@ -336,6 +355,15 @@ $(document).ready(function() {
     });
     //automatic trigger
     $('#role-switch').trigger('change');
+
+    //listenet for typing in search bar
+    $('#search-input').on('input', function() {
+        renderListings();
+    });
+    //listen for drop down selection
+    $('#category-filter').on('change', function() {
+        renderListings();
+    });
 
     //back button logic
     $('#back-to-grid').on('click', function() {

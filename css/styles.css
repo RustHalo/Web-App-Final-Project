@@ -132,3 +132,11 @@ footer {
 .mt-10 { margin-top: 10px;}
 .mr-10 { margin-right: 10px;}
 
+/*no items found message*/
+.empty-message {
+    text-align: center;
+    width: 100%;
+    margin-top: 40px;
+    color: #64748b;
+    font-weight: bold;
+}

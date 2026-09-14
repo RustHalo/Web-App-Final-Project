@@ -393,6 +393,8 @@ $(document).ready(function() {
     $('#btn-show-post-form').on('click', function(event) {
         event.preventDefault();
         $('#dashboard-view').hide();
+        $('#grid-view').hide();
+        $('#listings-grid').hide();
         $('#create-view').show();
 
         window.scrollTo(0, 0);

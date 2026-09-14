@@ -290,9 +290,26 @@ function renderDashboard() {
                 window.scrollTo(0, 0);
             });
 
+            //remove from fav
+            let removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.classList.add('btn-delete', 'mt-10', 'ml-10');
+
+            removeBtn.onclick = function() {
+                if (confirm("Remove this item from favorites?")) {
+                    let currentFavorites = getFavorites();
+
+                    currentFavorites = currentFavorites.filter((fav) => fav.id !== item.id);
+
+                    saveFavorites(currentFavorites);
+                    renderDashboard();
+                }
+            };
+
             card.appendChild(title);
             card.appendChild(price);
             card.appendChild(viewBtn);
+            card.appendChild(removeBtn);
 
             favContainer.appendChild(card);
         });

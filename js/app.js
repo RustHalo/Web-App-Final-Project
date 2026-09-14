@@ -143,6 +143,8 @@ function renderListings() {
                         currentFavorites.push(item);
                         saveFavorites(currentFavorites);
                         alert(item.title + " has been saved to your favorites!");
+
+                        renderDashboard();
                     }
                 };
                 card.appendChild(favBtn);
@@ -196,7 +198,6 @@ function renderDashboard() {
 
     if (myItems.length === 0) {
         container.innerHTML = '<p>You have not posted any items yet.</p>';
-        return;
     }
 
     myItems.forEach((item) => {

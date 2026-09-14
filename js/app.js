@@ -237,6 +237,9 @@ function renderDashboard() {
 
             $('#create-listing-form').attr('data-edit-id', item.id);
 
+            $('#dashboard-view').hide();
+            $('#create-view').show();
+
             window.scrollTo(0, 0);
         };
 
@@ -414,6 +417,19 @@ $(document).ready(function() {
 
         window.scrollTo(0, 0);
 
+    });
+
+    //back to dashboard button
+    $('#back-to-dashboard').on('click', function(event) {
+        event.preventDefault();
+
+        $('#create-listing-form').removeAttr('data-edit-id');
+        document.getElementById('create-listing-form').reset();
+
+        $('#create-view').hide();
+        $('#dashboard-view').show();
+
+        window.scrollTo(0, 0);
     });
 
     $('#link-report-problem').on('click', function(event) {
@@ -638,15 +654,13 @@ $(document).ready(function() {
 
         //stringify and set updated array to localStorage
         saveListings(currentListings);
-        //re-render grid
+        //re-render grid and dashboard
         renderListings();
         renderDashboard();
         //clear form fields
         this.reset();
 
         $('#create-view').hide();
-        $('#grid-view').show();
-        $('#listings-grid').show();
         $('#dashboard-view').show();
 
         window.scrollTo(0, 0);

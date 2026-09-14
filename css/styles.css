@@ -27,13 +27,18 @@ h1, h2, h3 {
 }
 
 header {
+    background-color: #0f172a; 
+    padding: 20px;
+    border-radius: 8px;
     margin-bottom: 30px;
+    position: sticky;
+    top: 0;
 }
 
 /*remove bottom margin for header title*/
 header h1 {
-    margin-bottom: 0;
-    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 15px;
 }
 
 /*role switch*/

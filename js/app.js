@@ -133,11 +133,17 @@ function renderListings() {
 
                 favBtn.onclick = function() {
                     let currentFavorites = getFavorites();
+                    let existingItem = currentFavorites.find((fav) => fav.id === item.id);
 
-                    currentFavorites.push(item);
-                    saveFavorites(currentFavorites);
-
-                    alert(item.title + " has been saved to your favorites!");
+                    //existing item?
+                    if (existingItem) {
+                        alert("This item is already saved to favorites!");
+                    } else {
+                        //not existing item?
+                        currentFavorites.push(item);
+                        saveFavorites(currentFavorites);
+                        alert(item.title + " has been saved to your favorites!");
+                    }
                 };
                 card.appendChild(favBtn);
             }
